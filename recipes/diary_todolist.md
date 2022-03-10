@@ -85,10 +85,8 @@ class Diary
   # add an instance from DiaryEntry class
   end
 
-  def select_entry(available_mins, wpm)
-  # wpm stands for words per minute, assumed integer input
-  # available_mins assumed integer input
-  # choose an entry based on how much time the reader has and their reading speed
+  def all_entries
+  # returns all diary entries
   end
 
   def list_contacts
@@ -97,14 +95,26 @@ class Diary
   # list contacts by name and phone number
   end
 
-  def list_entries
-  # returns all diary entries
+  def add_todo_list(todo_list)
+  # adds an instance of TodoList to the diary
   end
+
+  def all_todo_lists
+  # returns all todo lists in the diary
+  end
+
+  def select_entry(available_mins, wpm)
+  # wpm stands for words per minute, assumed integer input
+  # available_mins assumed integer input
+  # choose an entry based on how much time the reader has and their reading speed
+  end
+
 end
 
 class DiaryEntry
-  def initialize
+  def initialize(title, contents)
   # needs @title, @contents
+  @contact_info = {}
   end
 
   def count_words
@@ -131,6 +141,11 @@ class DiaryEntry
   def add_contact(name, phone_num)
   # hash?
   # allows you to add a name and phone number
+  end
+
+  def contact
+  # return contact details
+  return @contact_info
   end
 end
 
@@ -183,15 +198,26 @@ _Create examples of the classes being used together in different situations and
 combinations that reflect the ways in which the system will be used._
 
 ```ruby
-# EXAMPLE
+diary = Diary.new
+first_entry = DiaryEntry.new("my title", "my contents")
+second_entry = DiaryEntry.new("another title", "some more contents")
+diary.add(first_entry)
+diary.add(second_entry)
+diary.all_entries # => [first_entry, second_entry]
 
-# Gets all tracks
-library = MusicLibrary.new
-track_1 = Track.new("Carte Blanche", "Veracocha")
-track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.all # => [track_1, track_2]
+diary = Diary.new
+first_entry = DiaryEntry.new("my title", "my contents")
+first_entry.
+
+
+
+
+# library = MusicLibrary.new
+# track_1 = Track.new("Carte Blanche", "Veracocha")
+# track_2 = Track.new("Synaesthesia", "The Thrillseekers")
+# library.add(track_1)
+# library.add(track_2)
+# library.all # => [track_1, track_2]
 ```
 
 ## 4. Create Examples as Unit Tests
