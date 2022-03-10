@@ -68,7 +68,7 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 │                                              │                 │                                                   │
 │  phone_number?                               │                 │                                                   │
 │                                              │                 │                                                   │
-│  add_contact(name, phone_num)                │                 │                                                   │
+│  add_contact(name, phone_num) - hash         │                 │                                                   │
 │                                              │                 │                                                   │
 │                                              │                 │                                                   │
 └──────────────────────────────────────────────┘                 └───────────────────────────────────────────────────┘
@@ -77,31 +77,102 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 _Also design the interface of each class in more detail._
 
 ```ruby
-class MusicLibrary
-  def initialize
-    # ...
+class Diary
+  def initialize # global variables here. Will need an empty array for entries.
   end
 
-  def add(track) # track is an instance of Track
-    # Track gets added to the library
-    # Returns nothing
+  def add(entry)
+  # add an instance from DiaryEntry class
   end
 
-  def all
-    # Returns a list of track objects
+  def select_entry(available_mins, wpm)
+  # wpm stands for words per minute, assumed integer input
+  # available_mins assumed integer input
+  # choose an entry based on how much time the reader has and their reading speed
   end
-  
-  def search_by_title(keyword) # keyword is a string
-    # Returns a list of tracks with titles that include the keyword
+
+  def list_contacts
+  # be an array
+  # take contact information (instance) from DiaryEntry class
+  # list contacts by name and phone number
+  end
+
+  def list_entries
+  # returns all diary entries
   end
 end
 
-class Track
-  def initialize(title, artist) # title and artist are both strings
+class DiaryEntry
+  def initialize
+  # needs @title, @contents
   end
 
-  def format
-    # Returns a string of the form "TITLE by ARTIST"
+  def count_words
+  # count the number of words in a diary entry
+  end
+
+  def calculate_reading_time(wpm)
+  # wpm is assumed to be an integer. 
+  # estimates the time taken to read words in entry based on words per minute (wpm)
+  end
+
+  def title
+  # returns title
+  end
+
+  def content
+  #return content
+  end
+
+  def phone_number?
+  # returns true if phone number
+  end
+
+  def add_contact(name, phone_num)
+  # hash?
+  # allows you to add a name and phone number
+  end
+end
+
+class TodoList
+  def initialize
+  # @tasks = []
+  end
+
+  def add(todo)
+   # add instance from Todo class
+   # return nothing
+  end
+
+  def complete
+  # return completed tasks
+  end
+
+  def incomplete
+  # returns incomplete tasks
+  end
+
+  def delete
+  # delete completed tasks from todo list
+  # returns updated todo list
+  end
+end
+
+class Todo
+  def initialize(todo)
+  # @todo = todo
+  end
+
+  def todo
+  # return todo
+  end
+
+  def mark_done
+  # mark a todo complete
+  end
+
+  def done?
+  # returns whether task is done or note
   end
 end
 ```
