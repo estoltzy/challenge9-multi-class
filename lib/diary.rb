@@ -48,11 +48,8 @@ class Diary
   # available_mins assumed integer input
   # choose an entry based on how much time the reader has and their reading speed
     readable_entries = @entries.filter do |entry|
-      entry.reading_time(wpm) <= minutes  
+      entry.calculate_reading_time(wpm) <= minutes
     end
-  #   sorted_by_longest = readable_entries.sort_by do |entry|
-  #     entry.count_words
-  #   end
-  # sorted_by_longest.last
+    return readable_entries
   end
 end

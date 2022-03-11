@@ -23,10 +23,10 @@ RSpec.describe 'Diary Integration' do
     expect(diary.list_contacts).to eq [first_contact, second_contact]
   end
 
-  xit 'adds a todo list and returns all todo lists' do
+  it 'adds a todo list and returns all todo lists' do
     diary = Diary.new
-    first_todolist = TodoList.new("todolist1")
-    second_todolist = TodoList.new("todolist2")
+    first_todolist = TodoList.new
+    second_todolist = TodoList.new
     diary.add_todo_list(first_todolist)
     diary.add_todo_list(second_todolist)
     expect(diary.all_todo_lists).to eq [first_todolist, second_todolist]
@@ -38,7 +38,7 @@ RSpec.describe 'Diary Integration' do
     second_entry = DiaryEntry.new("another title", "some more contents")
     diary.add(first_entry)
     diary.add(second_entry)
-    expect(diary.select_entry(1, 2)).to eq first_entry
+    expect(diary.select_entry(1, 2)).to eq [first_entry]
   end
 end
 
