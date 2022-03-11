@@ -79,6 +79,7 @@ _Also design the interface of each class in more detail._
 ```ruby
 class Diary
   def initialize # global variables here. Will need an empty array for entries.
+  @contact_info = []
   end
 
   def add(entry)
@@ -89,10 +90,12 @@ class Diary
   # returns all diary entries
   end
 
+  def add_contact(contact)
+  # add an instance from ContactEntry class. Store in @contact_info hash
+  end
+
   def list_contacts
-  # be an array
-  # take contact information (instance) from DiaryEntry class
-  # list contacts by name and phone number
+  # return @contact_info
   end
 
   def add_todo_list(todo_list)
@@ -108,13 +111,11 @@ class Diary
   # available_mins assumed integer input
   # choose an entry based on how much time the reader has and their reading speed
   end
-
 end
 
 class DiaryEntry
   def initialize(title, contents)
   # needs @title, @contents
-  @contact_info = {}
   end
 
   def count_words
@@ -137,20 +138,10 @@ class DiaryEntry
   def phone_number?
   # returns true if phone number
   end
-
-  def add_contact(name, phone_num)
-  # hash?
-  # allows you to add a name and phone number
-  end
-
-  def contact
-  # return contact details
-  return @contact_info
-  end
 end
 
 class TodoList
-  def initialize
+  def initialize(tasks)
   # @tasks = []
   end
 
@@ -171,6 +162,10 @@ class TodoList
   # delete completed tasks from todo list
   # returns updated todo list
   end
+
+  def list_todos
+  # returns all todos
+  end
 end
 
 class Todo
@@ -187,7 +182,21 @@ class Todo
   end
 
   def done?
-  # returns whether task is done or note
+  # returns true if todo is complete
+  end
+end
+
+class ContactEntry
+  def initialize(contact)
+  @contact = contact
+  end
+
+  def add_contact_details(contact_details)
+  # contact is a string including name and phone number
+  end
+
+  def contact
+  # returns contact
   end
 end
 ```
@@ -206,18 +215,55 @@ diary.add(second_entry)
 diary.all_entries # => [first_entry, second_entry]
 
 diary = Diary.new
+first_contact = ContactEntry.new("name", "phone number")
+second_contact = ContactEntry.new("name2", "phone number2")
+diary.add_contact(first_contact)
+diary.add_contact(second_contact)
+diary.list_contacts # => [first_contact, second_contact]
+
+diary = Diary.new
+first_todolist = TodoList.new("todolist1")
+second_todolist = TodoList.new("todolist2")
+diary.add_todo_list(first_todolist)
+diary.add_todo_list(second_todolist)
+diary.all_todo_lists # => [first_todolist, second_todolist]
+
+diary = Diary.new
 first_entry = DiaryEntry.new("my title", "my contents")
-first_entry.
+second_entry = DiaryEntry.new("another title", "some more contents")
+diary.add(first_entry)
+diary.add(second_entry)
+diary.select_entry(1, 2) # => first_entry
 
+todolist = TodoList.new
+first_todo = Todo.new("Wash the car")
+second_todo = Todo.new("Paint the fence")
+todolist.add(first_todo)
+todolist.add(second_todo)
+todolist.list_todos # => [first_todo, second_todo]
 
+todolist = TodoList.new
+first_todo = Todo.new("Wash the car")
+second_todo = Todo.new("Paint the fence")
+todolist.add(first_todo)
+todolist.add(second_todo)
+todolist.incomplete # => [first_todo, second_todo]
 
+todolist = TodoList.new
+first_todo = Todo.new("Wash the car")
+second_todo = Todo.new("Paint the fence")
+todolist.add(first_todo)
+todolist.add(second_todo)
+todolist.mark_done(first_todo)
+todolist.incomplete # => [second_todo]
+todolist.complete # => [first_todo]
 
-# library = MusicLibrary.new
-# track_1 = Track.new("Carte Blanche", "Veracocha")
-# track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-# library.add(track_1)
-# library.add(track_2)
-# library.all # => [track_1, track_2]
+todolist = TodoList.new
+first_todo = Todo.new("Wash the car")
+second_todo = Todo.new("Paint the fence")
+todolist.add(first_todo)
+todolist.add(second_todo)
+todolist.delete(first_todo) # => [second_todo]
 ```
 
 ## 4. Create Examples as Unit Tests
@@ -226,11 +272,35 @@ _Create examples, where appropriate, of the behaviour of each relevant class at
 a more granular level of detail._
 
 ```ruby
-# EXAMPLE
+# Returns title of diary entry
+diary_entry = DiaryEntry.new("my title", "my contents")
+diary_entry.title # => "my title"
 
-# Constructs a track
-track = Track.new("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
+# Returns contents of diary entry
+diary_entry = DiaryEntry.new("my title", "my contents")
+diary_entry.contents # => "my contents"
+
+# Checks for phone number in contents
+diary_entry = DiaryEntry.new("my title", "my contents includes 0123456890")
+diary_entry.phone_number? # => true
+
+# Counts the number of words in a diary entry
+diary_entry = DiaryEntry.new("my title", "my contents has five words")
+diary_entry.count_words # => 5
+
+# Calculates the reading time using wpm
+diary_entry = DiaryEntry.new("my title", "my contents has six words wow")
+diary_entry.calculate_reading_time(2) # => 3
+
+new_todo = Todo.new("Wash the car")
+new_todo.todo # => "Wash the car"
+
+new_todo = Todo.new("Wash the car")
+new_todo.mark_done
+new_todo.done? # => true
+
+new_contact = ContactEntry.new("Eleanor - 02077367699")
+new_contact.contact # => "Eleanor - 02077367699"
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
