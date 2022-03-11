@@ -1,26 +1,29 @@
 class DiaryEntry
   def initialize(title, contents)
-  # needs @title, @contents
+    @title = title
+    @contents = contents
   end
 
   def count_words
-  # count the number of words in a diary entry
+    @contents.split(" ").count
   end
 
   def calculate_reading_time(wpm)
   # wpm is assumed to be an integer. 
-  # estimates the time taken to read words in entry based on words per minute (wpm)
+    words = @contents.split(" ")
+    (words.length / wpm.to_f).ceil    
   end
 
   def title
-  # returns title
+    return @title
   end
 
-  def content
-  #return content
+  def contents
+    return @contents
   end
 
   def phone_number?
-  # returns true if phone number
+    @contents.is_a? Integer
+    return true
   end
 end

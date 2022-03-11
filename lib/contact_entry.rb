@@ -1,13 +1,9 @@
 class ContactEntry
-  def initialize(contact)
+  def initialize(contact) #contact is a string including name and phone number
   @contact = contact
   end
 
-  def add_contact_details(contact_details)
-  # contact is a string including name and phone number
-  end
-
   def contact
-  # returns contact
+  return @contact
   end
 end

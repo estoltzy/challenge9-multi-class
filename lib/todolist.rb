@@ -1,27 +1,30 @@
 class TodoList
-  def initialize(tasks)
-  # @tasks = []
+  def initialize
+    @tasks = []
   end
 
   def add(todo)
-   # add instance from Todo class
-   # return nothing
+    @tasks << todo
   end
 
   def complete
-  # return completed tasks
+    @tasks.select do |task|
+      task.done?
+    end
   end
 
   def incomplete
-  # returns incomplete tasks
+    @tasks.select do |task|
+      !task.done?
+    end
   end
 
-  def delete
-  # delete completed tasks from todo list
-  # returns updated todo list
+  def delete(completed_todo)
+    @tasks.delete(completed_todo)
+    return @tasks
   end
 
   def list_todos
-  # returns all todos
+    return @tasks
   end
 end

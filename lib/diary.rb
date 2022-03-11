@@ -4,37 +4,55 @@ require_relative 'todo'
 require_relative 'contact_entry'
 
 class Diary
-  def initialize # global variables here. Will need an empty array for entries.
-  @contact_info = []
+  def initialize 
+    @entries = []
+    @contact_info = []
+    @phone_numbers = []
+    @todo_lists = []
   end
 
   def add(entry)
-  # add an instance from DiaryEntry class
+    @entries << entry
   end
 
   def all_entries
-  # returns all diary entries
+    return @entries
   end
 
   def add_contact(contact)
-  # add an instance from ContactEntry class. Store in @contact_info hash
+    @contact_info << contact
   end
 
   def list_contacts
-  # return @contact_info
+    return @contact_info
+  end
+
+  def add_phone_numbers(number)
+    @phone_numbers << number
+  end
+
+  def phone_numbers
+    return @phone_numbers
   end
 
   def add_todo_list(todo_list)
-  # adds an instance of TodoList to the diary
+    @todo_lists << todo_list
   end
 
   def all_todo_lists
-  # returns all todo lists in the diary
+    return @todo_lists
   end
 
-  def select_entry(available_mins, wpm)
+  def select_entry(minutes, wpm)
   # wpm stands for words per minute, assumed integer input
   # available_mins assumed integer input
   # choose an entry based on how much time the reader has and their reading speed
+    readable_entries = @entries.filter do |entry|
+      entry.reading_time(wpm) <= minutes  
+    end
+  #   sorted_by_longest = readable_entries.sort_by do |entry|
+  #     entry.count_words
+  #   end
+  # sorted_by_longest.last
   end
 end

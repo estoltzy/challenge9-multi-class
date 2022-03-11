@@ -1,17 +1,18 @@
 class Todo
-  def initialize(todo)
-  # @todo = todo
+  def initialize(todo) # todo is a string
+  @todo = todo
+  @done = false
   end
 
   def todo
-  # return todo
+    return @todo
   end
 
   def mark_done
-  # mark a todo complete
+    @done = true
   end
 
   def done?
-  # returns true if todo is complete
+    return @done
   end
 end
